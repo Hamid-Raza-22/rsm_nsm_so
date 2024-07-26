@@ -5,6 +5,7 @@ import 'LIVE_location_page.dart';
 import 'RSM_Booker_Details.dart';
 import 'RSM_ShopDetails.dart';
 import 'RSM_ShopVisit.dart';
+import 'RSM_bookerbookingdetails.dart';
 // Import other pages if needed
 
 class RSMHomepage extends StatefulWidget {
@@ -55,85 +56,98 @@ class _RSMHomepageState extends State<RSMHomepage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(Icons.home, color: Colors.white),
-            SizedBox(width: 10),
-            Text(
-              'RSM Homepage',
-              style: TextStyle(
-                fontFamily: 'Pacifico',
-                fontSize: 24,
-                color: Colors.white
-              ),
-            ),
-          ],
-        ),
-        flexibleSpace: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Colors.green, Colors.teal],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.refresh, color: Colors.green),
+            onPressed: () {
+              // Add reload functionality here
+            },
           ),
-        ),
+        ],
+        backgroundColor: Colors.transparent, // Transparent background
+        elevation: 0, // Remove shadow
+        title: null, // No title
         centerTitle: true,
-      ),
-      bottomNavigationBar: BottomAppBar(
-        color: Colors.green,
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  const Icon(Icons.info, color: Colors.white),
-                  const SizedBox(width: 8),
-                  Text(
-                    isClockedIn ? _formatElapsedTime(_elapsedSeconds) : 'Timer',
-                    style: const TextStyle(color: Colors.white, fontSize: 20),
-                  ),
-                ],
-              ),
-              ElevatedButton.icon(
-                onPressed: () async {
-                  await _toggleClockInOut();
-                },
-                icon: Icon(
-                  isClockedIn ? Icons.timer_off : Icons.timer,
-                  color: isClockedIn ? Colors.red : Colors.green,
-                ),
-                label: Text(
-                  isClockedIn ? 'Clock Out' : 'Clock In',
-                  style: const TextStyle(fontSize: 15),
-                ),
-                style: ElevatedButton.styleFrom(
-                  foregroundColor: isClockedIn ? Colors.red : Colors.green,
-                  backgroundColor: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                ),
-              ),
-            ],
-          ),
+        flexibleSpace: Container(
+          color: Colors.transparent, // Transparent color to ensure no background
         ),
       ),
-      body: Padding(
+      body:Padding(
         padding: const EdgeInsets.all(16.0),
-        child: GridView.count(
-          crossAxisCount: 2,
-          crossAxisSpacing: 16.0,
-          mainAxisSpacing: 16.0,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            _buildCard(context, 'SHOP VISIT', Icons.store, Colors.green),
-            _buildCard(context, 'BOOKERS STATUS', Icons.person, Colors.blue),
-            _buildCard(context, 'SHOPS DETAILS', Icons.info, Colors.orange),
-            _buildCard(context, 'BOOKERS ORDER DETAILS', Icons.book, Colors.purple),
-            _buildCard(context, 'LIVE LOCATION', Icons.location_on, Colors.red),
+          const Text(
+          'RSM - DASHBOARD',
+          style: TextStyle(
+            fontFamily: 'avenir next',
+            fontSize: 24,
+          ),
+        ),
+        const SizedBox(height: 20),
+            Expanded(
+              child: GridView.builder(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 16.0,
+                  mainAxisSpacing: 16.0,
+                ),
+                itemCount: 5,
+                itemBuilder: (context, index) {
+                  final cardInfo = [
+                    {'title': 'SHOP VISIT', 'icon': Icons.store, 'color': Colors.green},
+                    {'title': 'BOOKERS STATUS', 'icon': Icons.person, 'color': Colors.green},
+                    {'title': 'SHOPS DETAILS', 'icon': Icons.info, 'color': Colors.green},
+                    {'title': 'BOOKERS ORDER DETAILS', 'icon': Icons.book, 'color': Colors.green},
+                    {'title': 'LIVE LOCATION', 'icon': Icons.location_on, 'color': Colors.green},
+                  ][index];
+
+                  return _buildCard(
+                    context,
+                    cardInfo['title'] as String,
+                    cardInfo['icon'] as IconData,
+                    cardInfo['color'] as Color,
+                  );
+                },
+              ),
+            ),
+            const SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'TIMER: ${_formatElapsedTime(_elapsedSeconds)}',
+                  style: const TextStyle(
+                    fontFamily: 'avenir next',
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(width: 50),
+                ElevatedButton.icon(
+                  onPressed: () async {
+                    await _toggleClockInOut();
+                  },
+                  icon: Icon(
+                    isClockedIn ? Icons.timer_off : Icons.timer,
+                    color: Colors.white,
+                  ),
+                  label: Text(
+                    isClockedIn ? 'Clock Out' : 'Clock In',
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontFamily: 'avenir next',
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.green,
+                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  ),
+                ),
+              ],
+            ),
           ],
         ),
       ),
@@ -142,9 +156,9 @@ class _RSMHomepageState extends State<RSMHomepage> {
 
   Widget _buildCard(BuildContext context, String title, IconData icon, Color color) {
     return Card(
-      elevation: 5,
+      elevation: 4,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12.0),
+        borderRadius: BorderRadius.circular(10.0),
       ),
       child: InkWell(
         onTap: () {
@@ -160,16 +174,16 @@ class _RSMHomepageState extends State<RSMHomepage> {
                     begin: Alignment.bottomCenter,
                     end: Alignment.topCenter,
                   ),
+                  borderRadius: BorderRadius.circular(10.0),
                 ),
               ),
             ),
-            Align(
-              alignment: Alignment.center,
+            Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                    padding: const EdgeInsets.all(16.0),
+                    padding: const EdgeInsets.all(10.0),
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
                         colors: [color, color.withOpacity(0.7)],
@@ -180,17 +194,17 @@ class _RSMHomepageState extends State<RSMHomepage> {
                     ),
                     child: Icon(
                       icon,
-                      size: 40,
+                      size: 24,
                       color: Colors.white,
                     ),
                   ),
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 12),
                   Text(
                     title,
                     textAlign: TextAlign.center,
                     style: const TextStyle(
                       fontFamily: 'avenir next',
-                      fontSize: 18,
+                      fontSize: 12,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -204,7 +218,6 @@ class _RSMHomepageState extends State<RSMHomepage> {
   }
 
   void _navigateToPage(BuildContext context, String title) {
-    // Navigation logic based on the title
     switch (title) {
       case 'SHOP VISIT':
         Navigator.push(
@@ -227,7 +240,7 @@ class _RSMHomepageState extends State<RSMHomepage> {
       case 'BOOKERS ORDER DETAILS':
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => BookingBookPage()),
+          MaterialPageRoute(builder: (context) => RSMBookingBookPage()),
         );
         break;
       case 'LIVE LOCATION':
@@ -237,17 +250,5 @@ class _RSMHomepageState extends State<RSMHomepage> {
         );
         break;
     }
-  }
-}
-
-class BookingBookPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('RSM BOOKING BOOK'),
-      ),
-      body: const Center(child: Text('Booking Book Page')),
-    );
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:rsm_nsm_so/RSM_HomePage.dart';
 
+import 'landing_page.dart';
+import 'RSM/RSM_HomePage.dart';
 
 Future<void> main() async {
 
@@ -8,7 +9,7 @@ Future<void> main() async {
  runApp(
     const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: RSMHomepage()
+      home: LandingPage()
     ),
   );
 }

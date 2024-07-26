@@ -11,7 +11,7 @@ class BookerDetailsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('RSM-BOOKER DETAILS'),
+        title: const Text('Booker Status'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
