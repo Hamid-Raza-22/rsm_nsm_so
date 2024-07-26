@@ -74,12 +74,11 @@ class _RSMBookingBookPageState extends State<RSMBookingBookPage> {
             const SizedBox(height: 30),
             Center(
               child: Text(
-                'RSM- Order Booking Status',
+                'Booker Order Detail',
                 style: TextStyle(
-                  fontFamily: "avenir",
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.green,
+                  fontFamily: 'avenir next',
+                  fontSize: 18,
+                  color: Colors.black,
                 ),
               ),
             ),
@@ -213,7 +212,7 @@ class _RSMBookingBookPageState extends State<RSMBookingBookPage> {
                 Expanded(
                   child: ElevatedButton(
                     onPressed: _handleSearch,
-                    child: const Text('Search'),
+                    child: const Text('Search', style: TextStyle(color: Colors.white)),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.green,
                       padding: const EdgeInsets.symmetric(vertical: 12),
@@ -227,7 +226,7 @@ class _RSMBookingBookPageState extends State<RSMBookingBookPage> {
                 Expanded(
                   child: ElevatedButton(
                     onPressed: _clearFilters,
-                    child: const Text('Clear Filters'),
+                    child: const Text('Clear Filters', style: TextStyle(color: Colors.white)),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.grey,
                       padding: const EdgeInsets.symmetric(vertical: 12),
@@ -265,11 +264,11 @@ class _RSMBookingBookPageState extends State<RSMBookingBookPage> {
                           DataCell(Text('Booker ${index + 1}', style: textStyle)),
                           DataCell(
                             Text('${(index + 1) * 2}', style: textStyle),
-                            onTap: () => _openDetailsPage('Shop Visits Details'),
+                            onTap: () => _openDetailsPage('Total Shop Visits'),
                           ),
                           DataCell(
                             Text('${(index + 1) * 3}', style: textStyle),
-                            onTap: () => _openDetailsPage('Orders Details'),
+                            onTap: () => _openDetailsPage('Total Orders'),
                           ),
                           DataCell(Text('\$${(index + 1) * 10}', style: textStyle)),
                           DataCell(Text('SO', style: textStyle)),
