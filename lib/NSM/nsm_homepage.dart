@@ -62,6 +62,17 @@ class _NSMHomepageState extends State<NSMHomepage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        title: Center(
+          child: Text(
+            'NSM HOMEPAGE',
+            style: TextStyle(
+              fontFamily: 'avenir next',
+              fontSize: 17 // Reduced font size for AppBar title
+            ),
+          ),
+        ),
+        backgroundColor: Colors.white,
+        iconTheme: IconThemeData(color: Colors.green), // Set back arrow color to green
         actions: [
           IconButton(
             icon: const Icon(Icons.refresh, color: Colors.green),
@@ -77,15 +88,6 @@ class _NSMHomepageState extends State<NSMHomepage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const SizedBox(height: 10),
-            const Text(
-              'NSM - DASHBOARD',
-              style: TextStyle(
-                fontFamily: 'avenir next',
-                fontSize: 24,
-              ),
-            ),
-            const SizedBox(height: 20), // Adjust spacing between heading and cards
-
             // Grid view for cards
             Expanded(
               child: GridView.builder(

@@ -1,68 +1,100 @@
 import 'package:flutter/material.dart';
-import 'SM_Booker_Status.dart';
-import 'SM_RSM_status.dart';
+import '../RSM_status.dart';
+import '../bookerstatus.dart';
 
-class BookingStatus extends StatelessWidget {
-  const BookingStatus({super.key});
+
+class BookingStatus extends StatefulWidget {
+  @override
+  _BookingStatusState createState() => _BookingStatusState();
+}
+
+class _BookingStatusState extends State<BookingStatus> {
+  final PageController _pageController = PageController();
+  int _selectedIndex = 0;
+
+  void _onButtonPressed(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+    _pageController.animateToPage(
+      index,
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeInOut,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        padding: const EdgeInsets.all(16.0),
-        color: Colors.white,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            _buildNavigationCard(context, 'RSM Status', Icons.location_city, SM_RSM_Status()),
-            const SizedBox(height: 16.0),
-            _buildNavigationCard(context, 'Booker Status', Icons.assignment_ind, SM_BookerStatus()), // New card for Booker Status
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildNavigationCard(BuildContext context, String title, IconData icon, Widget page) {
-    return GestureDetector(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => page),
-        );
-      },
-      child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15.0),
-        ),
-        elevation: 5,
-        child: Container(
-          height: 100,
-          padding: const EdgeInsets.all(16.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              Icon(icon, size: 50.0, color: Colors.green),
-              const SizedBox(width: 16.0),
-              Container(
-                width: 1,
-                height: 60,
-                color: Colors.green,
-              ),
-              const SizedBox(width: 16.0),
-              Text(
-                title,
-                style: const TextStyle(
-                  fontSize: 20.0,
-                  color: Colors.black,
-                  fontFamily: 'avenir next',
+      body: Column(
+        children: [
+          Container(
+            color: Colors.white,
+            height: 60, // Adjusted height for the button container
+            child: Row(
+              children: [
+                Expanded(
+                  child: GestureDetector(
+                    onTap: () => _onButtonPressed(0),
+                    child: Container(
+                      alignment: Alignment.center,
+                      padding: EdgeInsets.symmetric(vertical: 12), // Adjusted padding
+                      decoration: BoxDecoration(
+                        border: Border(
+                          bottom: BorderSide(
+                            color: _selectedIndex == 0 ? Colors.green : Colors.transparent,
+                            width: 3.0,
+                          ),
+                        ),
+                      ),
+                      child: Text(
+                        'RSM',
+                        style: TextStyle(
+                          color: _selectedIndex == 0 ? Colors.green : Colors.black,
+                          fontSize: 16, // Adjust text size if needed
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
-              ),
-            ],
+                Expanded(
+                  child: GestureDetector(
+                    onTap: () => _onButtonPressed(1),
+                    child: Container(
+                      alignment: Alignment.center,
+                      padding: EdgeInsets.symmetric(vertical: 12), // Adjusted padding
+                      decoration: BoxDecoration(
+                        border: Border(
+                          bottom: BorderSide(
+                            color: _selectedIndex == 1 ? Colors.green : Colors.transparent,
+                            width: 3.0,
+                          ),
+                        ),
+                      ),
+                      child: Text(
+                        'BOOKER',
+                        style: TextStyle(
+                          color: _selectedIndex == 1 ? Colors.green : Colors.black,
+                          fontSize: 16, // Adjust text size if needed
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
-        ),
+          Expanded(
+            child: PageView(
+              controller: _pageController,
+              children: [
+                RSM_Status(), // Replace with your actual page widget
+                BookerStatus(), // Replace with your actual page widget
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
 }
-

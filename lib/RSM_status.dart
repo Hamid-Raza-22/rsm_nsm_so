@@ -1,29 +1,25 @@
 import 'package:flutter/material.dart';
 
-class SM_BookerStatus extends StatefulWidget {
+class RSM_Status extends StatefulWidget {
   @override
-  _SM_BookerStatusState createState() => _SM_BookerStatusState();
+  _RSM_StatusState createState() => _RSM_StatusState();
 }
 
-class _SM_BookerStatusState extends State<SM_BookerStatus> {
+class _RSM_StatusState extends State<RSM_Status> {
   final List<Booker> _allBookers = [
     Booker(
-      name: 'HAMID RAZA',
-      designation: 'ASM',
+      name: 'Dummy name',
+      designation: 'RSM',
       attendanceStatus: 'Present',
       city: '',
     ),
     ...List.generate(
       20,
           (index) => Booker(
-        name: 'Booker $index',
-        designation: index % 3 == 0
-            ? 'ASM'
-            : index % 3 == 1
-            ? 'SO'
-            : 'SPO', // Example designation assignment
-        attendanceStatus: index % 2 == 0 ? 'Present' : 'Absent', // Example status assignment
-        city: index % 3 == 1 ? 'City $index' : '', // Example city assignment for SO
+        name: 'RSM $index',
+        designation: 'RSM', // Simplified designation assignment
+        attendanceStatus: index % 2 == 0 ? 'Present' : 'Absent',
+        city: index % 3 == 1 ? 'City $index' : '',
       ),
     ),
   ];
@@ -79,9 +75,9 @@ class _SM_BookerStatusState extends State<SM_BookerStatus> {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: Card(
-        elevation: 4.0,
+        elevation: 2.0, // Adjusted elevation
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10.0),
+          borderRadius: BorderRadius.circular(8.0), // Adjusted border radius
         ),
         child: TextField(
           controller: controller,
@@ -95,11 +91,11 @@ class _SM_BookerStatusState extends State<SM_BookerStatus> {
             border: InputBorder.none,
             focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(color: Colors.green, width: 1.5),
-              borderRadius: BorderRadius.circular(10.0),
+              borderRadius: BorderRadius.circular(8.0), // Adjusted border radius
             ),
             enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(color: Colors.grey[300]!, width: 1.0),
-              borderRadius: BorderRadius.circular(10.0),
+              borderRadius: BorderRadius.circular(8.0), // Adjusted border radius
             ),
             contentPadding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
           ),
@@ -114,7 +110,6 @@ class _SM_BookerStatusState extends State<SM_BookerStatus> {
   }
 
   Widget _buildBookerCard(Booker booker, Animation<double> animation) {
-    // Determine color based on attendance status
     Color statusColor;
     String statusText;
 
@@ -144,54 +139,54 @@ class _SM_BookerStatusState extends State<SM_BookerStatus> {
           );
         },
         child: Card(
-          margin: const EdgeInsets.all(8.0),
-          elevation: 5,
+          margin: const EdgeInsets.all(8.0), // Adjusted margin
+          elevation: 4.0, // Adjusted elevation
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(15.0),
+            borderRadius: BorderRadius.circular(10.0), // Adjusted border radius
           ),
           child: Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(12.0), // Adjusted padding
             child: Row(
               children: [
                 ClipRRect(
-                  borderRadius: BorderRadius.circular(15.0),
+                  borderRadius: BorderRadius.circular(10.0), // Adjusted border radius
                   child: SizedBox(
-                    width: 100,
-                    height: 100,
+                    width: 80, // Adjusted width
+                    height: 80, // Adjusted height
                     child: Image.asset(
-                      'assets/icons/OIP.png', // Path to your image
+                      'assets/icons/avatar3.png',
                       fit: BoxFit.cover,
                     ),
                   ),
                 ),
-                const SizedBox(width: 16.0),
+                const SizedBox(width: 12.0), // Adjusted spacing
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         booker.name,
-                        style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold), // Adjusted font size
                       ),
                       const SizedBox(height: 8.0),
                       Container(
-                        padding: const EdgeInsets.symmetric(vertical: 6.0, horizontal: 8.0),
+                        padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 6.0), // Adjusted padding
                         decoration: BoxDecoration(
                           color: statusColor.withOpacity(0.2),
-                          borderRadius: BorderRadius.circular(8.0),
+                          borderRadius: BorderRadius.circular(6.0), // Adjusted border radius
                         ),
                         child: Row(
                           children: [
                             Icon(
                               booker.attendanceStatus == 'Present' ? Icons.check : Icons.close,
-                              size: 16.0,
+                              size: 14.0, // Adjusted icon size
                               color: statusColor,
                             ),
                             const SizedBox(width: 4.0),
                             Expanded(
                               child: Text(
                                 statusText,
-                                style: TextStyle(fontSize: 16, color: statusColor),
+                                style: TextStyle(fontSize: 14, color: statusColor), // Adjusted font size
                               ),
                             ),
                           ],
@@ -200,12 +195,12 @@ class _SM_BookerStatusState extends State<SM_BookerStatus> {
                       const SizedBox(height: 4.0),
                       Row(
                         children: [
-                          const Icon(Icons.work, size: 16.0, color: Colors.green),
+                          const Icon(Icons.work, size: 14.0, color: Colors.green), // Adjusted icon size
                           const SizedBox(width: 4.0),
                           Expanded(
                             child: Text(
                               'Designation: ${booker.designation}',
-                              style: const TextStyle(fontSize: 16),
+                              style: const TextStyle(fontSize: 14), // Adjusted font size
                             ),
                           ),
                         ],
@@ -214,12 +209,12 @@ class _SM_BookerStatusState extends State<SM_BookerStatus> {
                         const SizedBox(height: 4.0),
                         Row(
                           children: [
-                            const Icon(Icons.location_on, size: 16.0, color: Colors.green),
+                            const Icon(Icons.location_on, size: 14.0, color: Colors.green), // Adjusted icon size
                             const SizedBox(width: 4.0),
                             Expanded(
                               child: Text(
                                 'City: ${booker.city}',
-                                style: const TextStyle(fontSize: 16),
+                                style: const TextStyle(fontSize: 14), // Adjusted font size
                               ),
                             ),
                           ],
@@ -240,20 +235,20 @@ class _SM_BookerStatusState extends State<SM_BookerStatus> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.all(10.0),
+        padding: const EdgeInsets.all(8.0), // Adjusted padding
         child: Column(
           children: [
             Card(
-              elevation: 2.0,
+              elevation: 2.0, // Adjusted elevation
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12.0),
+                borderRadius: BorderRadius.circular(10.0), // Adjusted border radius
               ),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
                   children: [
                     _buildTextField('Search by Attendance Status', _attendanceController, false, false),
-                    _buildTextField('Search by Booker Name', _nameController, false, false),
+                    _buildTextField('Search by RSM Name', _nameController, false, false),
                   ],
                 ),
               ),

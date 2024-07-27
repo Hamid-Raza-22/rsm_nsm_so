@@ -47,7 +47,6 @@ class _NSMShopDetailPageState extends State<NSMShopDetailPage> {
     }
   }
 
-
   void _removeShopsFromList() async {
     for (int i = _displayedShops.length - 1; i >= 0; i--) {
       final removedShop = _displayedShops.removeAt(i);
@@ -110,7 +109,6 @@ class _NSMShopDetailPageState extends State<NSMShopDetailPage> {
     );
   }
 
-
   Widget _buildShopCard(Shop shop, Animation<double> animation) {
     return FadeTransition(
       opacity: animation,
@@ -125,51 +123,51 @@ class _NSMShopDetailPageState extends State<NSMShopDetailPage> {
         },
         child: Card(
           margin: const EdgeInsets.all(8.0),
-          elevation: 5,
+          elevation: 4, // Reduced elevation
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(15.0),
+            borderRadius: BorderRadius.circular(12.0), // Reduced border radius
           ),
           child: Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(12.0), // Reduced padding
             child: Row(
               children: [
                 ClipRRect(
-                  borderRadius: BorderRadius.circular(15.0),
+                  borderRadius: BorderRadius.circular(12.0), // Reduced border radius
                   child: SizedBox(
-                    width: 100,
-                    height: 100,
+                    width: 80, // Reduced image width
+                    height: 80, // Reduced image height
                     child: Image.asset(
-                      'assets/icons/shop-svg-3.png', // Path to your vector image
+                      'assets/icons/shop-svg-3.png',
                       fit: BoxFit.cover,
                     ),
                   ),
                 ),
-                const SizedBox(width: 16.0),
+                const SizedBox(width: 12.0), // Reduced spacing
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         shop.name,
-                        style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold), // Reduced font size
                       ),
-                      const SizedBox(height: 8.0),
+                      const SizedBox(height: 6.0), // Reduced spacing
                       Row(
                         children: [
-                          const Icon(Icons.location_city, size: 16.0, color: Colors.green),
+                          const Icon(Icons.location_city, size: 14.0, color: Colors.green), // Reduced icon size
                           const SizedBox(width: 4.0),
                           Expanded(
-                            child: Text('City: ${shop.city}', style: const TextStyle(fontSize: 16)),
+                            child: Text('City: ${shop.city}', style: const TextStyle(fontSize: 14)), // Reduced font size
                           ),
                         ],
                       ),
-                      const SizedBox(height: 4.0),
+                      const SizedBox(height: 4.0), // Reduced spacing
                       Row(
                         children: [
-                          const Icon(Icons.location_on, size: 16.0, color: Colors.green),
+                          const Icon(Icons.location_on, size: 14.0, color: Colors.green), // Reduced icon size
                           const SizedBox(width: 4.0),
                           Expanded(
-                            child: Text('Address: ${shop.address}', style: const TextStyle(fontSize: 16)),
+                            child: Text('Address: ${shop.address}', style: const TextStyle(fontSize: 14)), // Reduced font size
                           ),
                         ],
                       ),
@@ -188,8 +186,12 @@ class _NSMShopDetailPageState extends State<NSMShopDetailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('NSM SHOP DETAIL'),
-        backgroundColor: Colors.green,
+        title: const Text(
+          'NSM SHOP DETAIL',
+          style: TextStyle(color: Colors.black, fontSize: 18), // Reduced text size
+        ),
+        backgroundColor: Colors.white,
+        iconTheme: IconThemeData(color: Colors.green),
       ),
       body: Padding(
         padding: const EdgeInsets.all(10.0),
@@ -200,19 +202,16 @@ class _NSMShopDetailPageState extends State<NSMShopDetailPage> {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12.0),
               ),
-
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
                   children: [
                     _buildTextField('Search by City', _cityController, false, false),
-                    // const SizedBox(height: 0.5),
                     _buildTextField('Search by Shop Name', _nameController, false, false),
                   ],
                 ),
               ),
             ),
-            // const SizedBox(height: 10.0),
             Expanded(
               child: AnimatedList(
                 key: _listKey,
@@ -228,8 +227,6 @@ class _NSMShopDetailPageState extends State<NSMShopDetailPage> {
       ),
     );
   }
-
-
 }
 
 class Shop {

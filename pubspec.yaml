@@ -69,7 +69,8 @@ flutter:
   assets:
       - assets/icons/shop_icon.svg
       - assets/icons/shop-svg-3.png
-      - assets/icons/OIP.png
+      - assets/icons/avatar3.png
+
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

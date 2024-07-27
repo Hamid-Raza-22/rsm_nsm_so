@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'nsm_booker_status.dart';
+import '../bookerstatus.dart';
+
+
 
 class NSMBookerDetailsPage extends StatelessWidget {
   final Booker booker;

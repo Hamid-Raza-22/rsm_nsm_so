@@ -8,8 +8,8 @@ class NSM_SM_Status extends StatefulWidget {
 class _NSM_SM_StatusState extends State<NSM_SM_Status> {
   final List<Booker> _allBookers = [
     Booker(
-      name: 'HAMID RAZA',
-      designation: 'ASM',
+      name: 'Dummy name',
+      designation: 'booker',
       attendanceStatus: 'Present',
       city: '',
     ),
@@ -77,11 +77,11 @@ class _NSM_SM_StatusState extends State<NSM_SM_Status> {
 
   Widget _buildTextField(String hint, TextEditingController controller, bool isDate, bool isReadOnly) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      padding: const EdgeInsets.symmetric(vertical: 6.0),
       child: Card(
-        elevation: 4.0,
+        elevation: 3.0,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10.0),
+          borderRadius: BorderRadius.circular(8.0),
         ),
         child: TextField(
           controller: controller,
@@ -91,17 +91,17 @@ class _NSM_SM_StatusState extends State<NSM_SM_Status> {
               color: Colors.green,
             ),
             hintText: hint,
-            hintStyle: TextStyle(color: Colors.grey[600]),
+            hintStyle: TextStyle(color: Colors.grey[600], fontSize: 14),
             border: InputBorder.none,
             focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.green, width: 1.5),
-              borderRadius: BorderRadius.circular(10.0),
+              borderSide: BorderSide(color: Colors.green, width: 1.0),
+              borderRadius: BorderRadius.circular(8.0),
             ),
             enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(color: Colors.grey[300]!, width: 1.0),
-              borderRadius: BorderRadius.circular(10.0),
+              borderRadius: BorderRadius.circular(8.0),
             ),
-            contentPadding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
+            contentPadding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
           ),
           keyboardType: isDate ? TextInputType.datetime : TextInputType.text,
           readOnly: isReadOnly,
@@ -144,54 +144,54 @@ class _NSM_SM_StatusState extends State<NSM_SM_Status> {
           );
         },
         child: Card(
-          margin: const EdgeInsets.all(8.0),
-          elevation: 5,
+          margin: const EdgeInsets.all(6.0),
+          elevation: 3,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(15.0),
+            borderRadius: BorderRadius.circular(10.0),
           ),
           child: Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(12.0),
             child: Row(
               children: [
                 ClipRRect(
-                  borderRadius: BorderRadius.circular(15.0),
+                  borderRadius: BorderRadius.circular(10.0),
                   child: SizedBox(
-                    width: 100,
-                    height: 100,
+                    width: 80,
+                    height: 80,
                     child: Image.asset(
-                      'assets/icons/OIP.png', // Path to your image
+                      'assets/icons/avatar3.png', // Path to your image
                       fit: BoxFit.cover,
                     ),
                   ),
                 ),
-                const SizedBox(width: 16.0),
+                const SizedBox(width: 12.0),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         booker.name,
-                        style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                       ),
-                      const SizedBox(height: 8.0),
+                      const SizedBox(height: 6.0),
                       Container(
-                        padding: const EdgeInsets.symmetric(vertical: 6.0, horizontal: 8.0),
+                        padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 6.0),
                         decoration: BoxDecoration(
                           color: statusColor.withOpacity(0.2),
-                          borderRadius: BorderRadius.circular(8.0),
+                          borderRadius: BorderRadius.circular(6.0),
                         ),
                         child: Row(
                           children: [
                             Icon(
                               booker.attendanceStatus == 'Present' ? Icons.check : Icons.close,
-                              size: 16.0,
+                              size: 14.0,
                               color: statusColor,
                             ),
                             const SizedBox(width: 4.0),
                             Expanded(
                               child: Text(
                                 statusText,
-                                style: TextStyle(fontSize: 16, color: statusColor),
+                                style: TextStyle(fontSize: 14, color: statusColor),
                               ),
                             ),
                           ],
@@ -200,12 +200,12 @@ class _NSM_SM_StatusState extends State<NSM_SM_Status> {
                       const SizedBox(height: 4.0),
                       Row(
                         children: [
-                          const Icon(Icons.work, size: 16.0, color: Colors.green),
+                          const Icon(Icons.work, size: 14.0, color: Colors.green),
                           const SizedBox(width: 4.0),
                           Expanded(
                             child: Text(
                               'Designation: ${booker.designation}',
-                              style: const TextStyle(fontSize: 16),
+                              style: const TextStyle(fontSize: 14),
                             ),
                           ),
                         ],
@@ -214,12 +214,12 @@ class _NSM_SM_StatusState extends State<NSM_SM_Status> {
                         const SizedBox(height: 4.0),
                         Row(
                           children: [
-                            const Icon(Icons.location_on, size: 16.0, color: Colors.green),
+                            const Icon(Icons.location_on, size: 14.0, color: Colors.green),
                             const SizedBox(width: 4.0),
                             Expanded(
                               child: Text(
                                 'City: ${booker.city}',
-                                style: const TextStyle(fontSize: 16),
+                                style: const TextStyle(fontSize: 14),
                               ),
                             ),
                           ],
@@ -240,20 +240,20 @@ class _NSM_SM_StatusState extends State<NSM_SM_Status> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.all(10.0),
+        padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
             Card(
-              elevation: 2.0,
+              elevation: 1.0,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12.0),
+                borderRadius: BorderRadius.circular(8.0),
               ),
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(6.0),
                 child: Column(
                   children: [
                     _buildTextField('Search by Attendance Status', _attendanceController, false, false),
-                    _buildTextField('Search by RSM Name', _nameController, false, false),
+                    _buildTextField('Search by Booker Name', _nameController, false, false),
                   ],
                 ),
               ),
@@ -283,50 +283,30 @@ class BookerDetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title: Text('${booker.name} Details')),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: Colors.green,
-                borderRadius: BorderRadius.circular(15.0),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Name: ${booker.name}',
-                      style: const TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
-                    ),
-                    SizedBox(height: 16),
-                    Text(
-                      'City: ${booker.city}',
-                      style: const TextStyle(
-                        fontSize: 18,
-                        color: Colors.white,
-                      ),
-                    ),
-                    SizedBox(height: 8),
-                    Text(
-                      'Designation: ${booker.designation}',
-                      style: const TextStyle(
-                        fontSize: 18,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+            Text(
+              'Name: ${booker.name}',
+              style: const TextStyle(fontSize: 18),
             ),
+            Text(
+              'Designation: ${booker.designation}',
+              style: const TextStyle(fontSize: 18),
+            ),
+            Text(
+              'Attendance Status: ${booker.attendanceStatus}',
+              style: const TextStyle(fontSize: 18),
+            ),
+            if (booker.designation == 'SO') ...[
+              Text(
+                'City: ${booker.city}',
+                style: const TextStyle(fontSize: 18),
+              ),
+            ],
           ],
         ),
       ),
