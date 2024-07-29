@@ -62,6 +62,23 @@ class _SMHomepageState extends State<SMHomepage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        title: Center(
+          child: const Text(
+            'SM DASHBOARD',
+            style: TextStyle(
+              fontFamily: 'avenir next',
+              fontSize: 17,
+            ),
+          ),
+        ),
+        backgroundColor: Colors.white, // White background
+        elevation: 1, // Add a subtle shadow
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.green), // Green back arrow
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
         actions: [
           IconButton(
             icon: const Icon(Icons.refresh, color: Colors.green),
@@ -71,22 +88,12 @@ class _SMHomepageState extends State<SMHomepage> {
           ),
         ],
       ),
-      body: Padding(
+      body:Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const Text(
-              'SM - DASHBOARD',
-              style: TextStyle(
-                fontFamily: 'avenir next',
-                fontSize: 24,
-
-              ),
-            ),
-            const SizedBox(height: 20), // Adjust spacing between heading and cards
-
-            // Grid view for cards
+            const SizedBox(height: 20),
             Expanded(
               child: GridView.builder(
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(

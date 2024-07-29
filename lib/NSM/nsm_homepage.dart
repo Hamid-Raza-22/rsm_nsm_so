@@ -64,7 +64,7 @@ class _NSMHomepageState extends State<NSMHomepage> {
       appBar: AppBar(
         title: Center(
           child: Text(
-            'NSM HOMEPAGE',
+            'NSM DASHBOARD',
             style: TextStyle(
               fontFamily: 'avenir next',
               fontSize: 17 // Reduced font size for AppBar title

@@ -30,7 +30,7 @@ class _BookingStatusState extends State<BookingStatus> {
         children: [
           Container(
             color: Colors.white,
-            height: 60, // Adjusted height for the button container
+            height: 90,
             child: Row(
               children: [
                 Expanded(

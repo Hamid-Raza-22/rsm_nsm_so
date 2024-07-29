@@ -60,7 +60,7 @@ class _NsmLocationNavigationState extends State<NsmLocationNavigation> {
                   child: TextButton(
                     onPressed: () => _onButtonTapped(1),
                     child: Container(
-                      padding: EdgeInsets.symmetric(vertical: 12),
+                      padding: EdgeInsets.symmetric(vertical: 17),
                       alignment: Alignment.center,
                       decoration: BoxDecoration(
                         border: Border(

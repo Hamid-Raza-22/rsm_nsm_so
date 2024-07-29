@@ -62,26 +62,20 @@ class _NSMBookingBookPageState extends State<NSMBookingBookPage> {
 
   @override
   Widget build(BuildContext context) {
-    final lightColorScheme = Theme.of(context).colorScheme;
     final textStyle = TextStyle(fontFamily: "avenir", fontSize: 14);
 
     return Scaffold(
+      appBar: AppBar(
+        title: Center(child: Text('Booker Order Detail', style: TextStyle(fontFamily: 'avenir next', fontSize: 17 , color: Colors.black))),
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.green,
+        elevation: 0,
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: 30),
-            Center(
-              child: Text(
-                'Booker Order Detail',
-                style: TextStyle(
-                  fontFamily: 'avenir next',
-                  fontSize: 18,
-                  color: Colors.black,
-                ),
-              ),
-            ),
             const SizedBox(height: 24), // Add space above the filters
 
             DropdownButtonFormField<String>(
@@ -297,6 +291,9 @@ class DetailsPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(title),
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.green, // Change back arrow color to green
+        elevation: 0, // Optional: Remove the shadow of the app bar
       ),
       body: Center(
         child: Text('Details for $title'),

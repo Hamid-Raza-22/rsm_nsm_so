@@ -57,6 +57,23 @@ class _RSMHomepageState extends State<RSMHomepage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        title: Center(
+          child: const Text(
+            'RSM DASHBOARD',
+            style: TextStyle(
+              fontFamily: 'avenir next',
+              fontSize: 17,
+            ),
+          ),
+        ),
+        backgroundColor: Colors.white, // White background
+        elevation: 1, // Add a subtle shadow
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.green), // Green back arrow
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
         actions: [
           IconButton(
             icon: const Icon(Icons.refresh, color: Colors.green),
@@ -65,27 +82,13 @@ class _RSMHomepageState extends State<RSMHomepage> {
             },
           ),
         ],
-        backgroundColor: Colors.transparent, // Transparent background
-        elevation: 0, // Remove shadow
-        title: null, // No title
-        centerTitle: true,
-        flexibleSpace: Container(
-          color: Colors.transparent, // Transparent color to ensure no background
-        ),
       ),
-      body:Padding(
+      body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-          const Text(
-          'RSM - DASHBOARD',
-          style: TextStyle(
-            fontFamily: 'avenir next',
-            fontSize: 24,
-          ),
-        ),
-        const SizedBox(height: 20),
+            const SizedBox(height: 20),
             Expanded(
               child: GridView.builder(
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
