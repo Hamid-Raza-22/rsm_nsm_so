@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'booker_details_page.dart';
+import '../booker_details_page.dart';
 
 class SMBookerDetailPage extends StatefulWidget {
   @override

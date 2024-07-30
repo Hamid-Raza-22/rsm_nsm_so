@@ -30,7 +30,7 @@ class _BookingStatusState extends State<BookingStatus> {
         children: [
           Container(
             color: Colors.white,
-            height: 90,
+            height: 65,
             child: Row(
               children: [
                 Expanded(
@@ -48,7 +48,7 @@ class _BookingStatusState extends State<BookingStatus> {
                         ),
                       ),
                       child: Text(
-                        'RSM',
+                        'BOOKER',
                         style: TextStyle(
                           color: _selectedIndex == 0 ? Colors.green : Colors.black,
                           fontSize: 16, // Adjust text size if needed
@@ -72,7 +72,7 @@ class _BookingStatusState extends State<BookingStatus> {
                         ),
                       ),
                       child: Text(
-                        'BOOKER',
+                        'RSM',
                         style: TextStyle(
                           color: _selectedIndex == 1 ? Colors.green : Colors.black,
                           fontSize: 16, // Adjust text size if needed
@@ -88,8 +88,8 @@ class _BookingStatusState extends State<BookingStatus> {
             child: PageView(
               controller: _pageController,
               children: [
-                RSM_Status(), // Replace with your actual page widget
-                BookerStatus(), // Replace with your actual page widget
+                BookerStatus(),
+                RSM_Status(),
               ],
             ),
           ),

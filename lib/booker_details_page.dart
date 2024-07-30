@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'sm_booker_details.dart';
+import 'SM/sm_booker_details.dart';
 
 class BookerDetailsPage extends StatelessWidget {
   final Booker booker;

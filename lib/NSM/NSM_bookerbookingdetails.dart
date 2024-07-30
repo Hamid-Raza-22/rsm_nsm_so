@@ -16,7 +16,13 @@ class _NSMBookingBookPageState extends State<NSMBookingBookPage> {
   String? _selectedStatus;
   DateTime? _startDate;
   DateTime? _endDate;
-  bool _showData = false;  // Boolean to control data visibility
+  bool _showData = true; // Initialize to true to show the grid by default
+
+  @override
+  void initState() {
+    super.initState();
+    _showData = true; // Ensure grid is visible initially
+  }
 
   Future<void> _selectDate(BuildContext context, bool isStart) async {
     final DateTime? picked = await showDatePicker(
@@ -43,13 +49,13 @@ class _NSMBookingBookPageState extends State<NSMBookingBookPage> {
       _selectedStatus = null;
       _startDate = null;
       _endDate = null;
-      _showData = false;
+      _showData = true; // Ensure grid remains visible when filters are cleared
     });
   }
 
   void _handleSearch() {
     setState(() {
-      _showData = true;
+      _showData = true; // Ensure grid remains visible when search is performed
     });
   }
 
@@ -62,20 +68,26 @@ class _NSMBookingBookPageState extends State<NSMBookingBookPage> {
 
   @override
   Widget build(BuildContext context) {
+    final lightColorScheme = Theme.of(context).colorScheme;
     final textStyle = TextStyle(fontFamily: "avenir", fontSize: 14);
 
     return Scaffold(
-      appBar: AppBar(
-        title: Center(child: Text('Booker Order Detail', style: TextStyle(fontFamily: 'avenir next', fontSize: 17 , color: Colors.black))),
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.green,
-        elevation: 0,
-      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            const SizedBox(height: 30),
+            Center(
+              child: Text(
+                'Booker Order Detail',
+                style: TextStyle(
+                  fontFamily: 'avenir next',
+                  fontSize: 18,
+                  color: Colors.black,
+                ),
+              ),
+            ),
             const SizedBox(height: 24), // Add space above the filters
 
             DropdownButtonFormField<String>(
@@ -238,8 +250,7 @@ class _NSMBookingBookPageState extends State<NSMBookingBookPage> {
                 scrollDirection: Axis.vertical,
                 child: SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
-                  child: _showData
-                      ? DataTable(
+                  child: DataTable(
                     columns: [
                       DataColumn(label: Text('Visit Date', style: textStyle)),
                       DataColumn(label: Text('User ID', style: textStyle)),
@@ -264,13 +275,15 @@ class _NSMBookingBookPageState extends State<NSMBookingBookPage> {
                             Text('${(index + 1) * 3}', style: textStyle),
                             onTap: () => _openDetailsPage('Total Orders'),
                           ),
-                          DataCell(Text('\$${(index + 1) * 10}', style: textStyle)),
-                          DataCell(Text('SO', style: textStyle)),
+                          DataCell(
+                            Text('${(index + 1) * 4}', style: textStyle),
+                            onTap: () => _openDetailsPage('Total Booking'),
+                          ),
+                          DataCell(Text('Designation ${index + 1}', style: textStyle)),
                         ],
                       ),
                     ),
-                  )
-                      : Container(), // Show empty container if no data to display
+                  ),
                 ),
               ),
             ),
@@ -291,9 +304,7 @@ class DetailsPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(title),
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.green, // Change back arrow color to green
-        elevation: 0, // Optional: Remove the shadow of the app bar
+        backgroundColor: Colors.green,
       ),
       body: Center(
         child: Text('Details for $title'),

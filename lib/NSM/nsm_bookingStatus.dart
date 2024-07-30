@@ -30,7 +30,7 @@ class _NSMBookingStatusState extends State<NSMBookingStatus> {
         children: [
           Container(
             color: Colors.white,
-            height: 90,
+            height: 65,
             child: Row(
               children: [
                 Expanded(

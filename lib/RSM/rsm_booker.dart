@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
 
-import 'SM/sm_booker_details.dart';
-import 'booker_details_page.dart';
-
-
-class BookerStatus extends StatefulWidget {
+class RsmBooker extends StatefulWidget {
   @override
-  _BookerStatusState createState() => _BookerStatusState();
+  _RsmBookerState createState() => _RsmBookerState();
 }
 
-class _BookerStatusState extends State<BookerStatus> {
+class _RsmBookerState extends State<RsmBooker> {
   final List<Booker> _allBookers = [
     Booker(
       name: 'Dummy name',
@@ -243,6 +239,16 @@ class _BookerStatusState extends State<BookerStatus> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.green,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.black),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        title: Text('Booker Status'),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
@@ -279,3 +285,34 @@ class _BookerStatusState extends State<BookerStatus> {
   }
 }
 
+class BookerDetailsPage extends StatelessWidget {
+  final Booker booker;
+
+  BookerDetailsPage({required this.booker});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Booker Details'),
+      ),
+      body: Center(
+        child: Text('Details for ${booker.name}'),
+      ),
+    );
+  }
+}
+
+class Booker {
+  final String name;
+  final String designation;
+  final String attendanceStatus;
+  final String city;
+
+  Booker({
+    required this.name,
+    required this.designation,
+    required this.attendanceStatus,
+    required this.city,
+  });
+}

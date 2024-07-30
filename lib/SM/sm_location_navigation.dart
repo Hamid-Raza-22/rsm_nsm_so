@@ -28,7 +28,7 @@ class _smnavigationState extends State<smnavigation> {
         children: [
           Container(
             color: Colors.white,
-            height: 90,
+            height: 65,
             child: Row(
               children: [
                 Expanded(

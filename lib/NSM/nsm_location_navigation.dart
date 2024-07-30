@@ -42,7 +42,7 @@ class _NsmLocationNavigationState extends State<NsmLocationNavigation> {
                         border: Border(
                           bottom: BorderSide(
                             color: _selectedIndex == 0 ? Colors.green : Colors.transparent,
-                            width: 2,
+                            width: 3,
                           ),
                         ),
                       ),
