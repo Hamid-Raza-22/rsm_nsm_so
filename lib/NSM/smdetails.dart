@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'RSM_Booker_Details.dart';
 
-class RSMBookerDetailsPage extends StatefulWidget {
+import 'nsm_sm_status.dart';
+
+
+class smdetails extends StatefulWidget {
   final Booker booker;
 
-  RSMBookerDetailsPage({required this.booker});
+  smdetails({required this.booker});
 
   @override
-  _RSMBookerDetailsPageState createState() => _RSMBookerDetailsPageState();
+  _smdetailsState createState() => _smdetailsState();
 }
 
-class _RSMBookerDetailsPageState extends State<RSMBookerDetailsPage> {
+class _smdetailsState extends State<smdetails> {
   final List<String> _statusOptions = ["Clock in", "Clock out"];
   final List<Map<String, dynamic>> _data = [
     {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'Rsmdetailpage.dart';
 
 class RSM_Status extends StatefulWidget {
   @override
@@ -134,7 +135,7 @@ class _RSM_StatusState extends State<RSM_Status> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => BookerDetailsPage(booker: booker),
+              builder: (context) => rsmdetailpagee(booker: booker),
             ),
           );
         },
@@ -270,64 +271,6 @@ class _RSM_StatusState extends State<RSM_Status> {
   }
 }
 
-class BookerDetailsPage extends StatelessWidget {
-  final Booker booker;
-
-  BookerDetailsPage({required this.booker});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: Colors.green,
-                borderRadius: BorderRadius.circular(15.0),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Name: ${booker.name}',
-                      style: const TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
-                    ),
-                    SizedBox(height: 16),
-                    Text(
-                      'City: ${booker.city}',
-                      style: const TextStyle(
-                        fontSize: 18,
-                        color: Colors.white,
-                      ),
-                    ),
-                    SizedBox(height: 8),
-                    Text(
-                      'Designation: ${booker.designation}',
-                      style: const TextStyle(
-                        fontSize: 18,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
 
 class Booker {
   final String name;

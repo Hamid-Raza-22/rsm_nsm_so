@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
-class NSM_SM_Status extends StatefulWidget {
+import 'smdetails.dart';
+
+class NsmSM extends StatefulWidget {
   @override
-  _NSM_SM_StatusState createState() => _NSM_SM_StatusState();
+  _NsmSMState createState() => _NsmSMState();
 }
 
-class _NSM_SM_StatusState extends State<NSM_SM_Status> {
+class _NsmSMState extends State<NsmSM> {
   final List<Booker> _allBookers = [
     Booker(
       name: 'Dummy name',
@@ -139,7 +141,7 @@ class _NSM_SM_StatusState extends State<NSM_SM_Status> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => BookerDetailsPage(booker: booker),
+              builder: (context) => smdetails(booker: booker),
             ),
           );
         },
@@ -275,44 +277,8 @@ class _NSM_SM_StatusState extends State<NSM_SM_Status> {
   }
 }
 
-class BookerDetailsPage extends StatelessWidget {
-  final Booker booker;
 
-  BookerDetailsPage({required this.booker});
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('${booker.name} Details')),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Name: ${booker.name}',
-              style: const TextStyle(fontSize: 18),
-            ),
-            Text(
-              'Designation: ${booker.designation}',
-              style: const TextStyle(fontSize: 18),
-            ),
-            Text(
-              'Attendance Status: ${booker.attendanceStatus}',
-              style: const TextStyle(fontSize: 18),
-            ),
-            if (booker.designation == 'SO') ...[
-              Text(
-                'City: ${booker.city}',
-                style: const TextStyle(fontSize: 18),
-              ),
-            ],
-          ],
-        ),
-      ),
-    );
-  }
-}
 
 class Booker {
   final String name;

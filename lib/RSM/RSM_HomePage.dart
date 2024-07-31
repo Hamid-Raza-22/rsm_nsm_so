@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:rsm_nsm_so/RSM/rsm_booker.dart';
+
 import 'dart:async';
 
 import '../bookerstatus.dart';
 import 'LIVE_location_page.dart';
+
 import 'RSM_Booker_Details.dart';
 import 'RSM_ShopDetails.dart';
 import 'RSM_ShopVisit.dart';
@@ -233,7 +234,7 @@ class _RSMHomepageState extends State<RSMHomepage> {
       case 'BOOKERS STATUS':
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => RsmBooker()),
+          MaterialPageRoute(builder: (context) => Rsmbookerdetails()),
         );
         break;
       case 'SHOPS DETAILS':

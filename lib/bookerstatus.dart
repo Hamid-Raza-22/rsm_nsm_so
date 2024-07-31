@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'SM/sm_booker_details.dart';
 import 'booker_details_page.dart';
-
 
 class BookerStatus extends StatefulWidget {
   @override
@@ -143,7 +140,7 @@ class _BookerStatusState extends State<BookerStatus> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => BookerDetailsPage(booker: booker),
+              builder: (context) => BookerDetails(booker: booker),
             ),
           );
         },
@@ -279,3 +276,19 @@ class _BookerStatusState extends State<BookerStatus> {
   }
 }
 
+
+
+
+class Booker {
+  final String name;
+  final String designation;
+  final String attendanceStatus;
+  final String city;
+
+  Booker({
+    required this.name,
+    required this.designation,
+    required this.attendanceStatus,
+    required this.city,
+  });
+}

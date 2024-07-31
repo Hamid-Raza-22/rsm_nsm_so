@@ -10,10 +10,12 @@ class _NSMBookingBookPageState extends State<NSMBookingBookPage> {
   final List<String> _shopOptions = ["Shop 1", "Shop 2", "Shop 3", "Shop 4", "Shop 5", "Shop 6", "Shop 7"];
   final List<String> _orderOptions = ["Order 1", "Order 2", "Order 3", "Order 4", "Order 5"];
   final List<String> _statusOptions = ["Dispatched", "Rescheduled", "Canceled", "Pending"];
+  final List<String> _roleOptions = ["Booker", "RSM"];
 
   String? _selectedShop;
   String? _selectedOrder;
   String? _selectedStatus;
+  String? _selectedRole; // Added selected role
   DateTime? _startDate;
   DateTime? _endDate;
   bool _showData = true; // Initialize to true to show the grid by default
@@ -47,6 +49,7 @@ class _NSMBookingBookPageState extends State<NSMBookingBookPage> {
       _selectedShop = null;
       _selectedOrder = null;
       _selectedStatus = null;
+      _selectedRole = null; // Reset selected role
       _startDate = null;
       _endDate = null;
       _showData = true; // Ensure grid remains visible when filters are cleared
@@ -88,8 +91,33 @@ class _NSMBookingBookPageState extends State<NSMBookingBookPage> {
                 ),
               ),
             ),
-            const SizedBox(height: 24), // Add space above the filters
+            const SizedBox(height: 24),
 
+            DropdownButtonFormField<String>(
+              decoration: InputDecoration(
+                labelText: "Select Designation",
+                filled: true,
+                fillColor: Colors.green.withOpacity(0.1),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide.none,
+                ),
+                contentPadding: const EdgeInsets.symmetric(horizontal: 16),
+              ),
+              value: _selectedRole,
+              items: _roleOptions
+                  .map((role) => DropdownMenuItem(
+                value: role,
+                child: Text(role),
+              ))
+                  .toList(),
+              onChanged: (value) {
+                setState(() {
+                  _selectedRole = value;
+                });
+              },
+            ),
+            const SizedBox(height: 16),
             DropdownButtonFormField<String>(
               decoration: InputDecoration(
                 labelText: "Select Shop",
@@ -257,29 +285,25 @@ class _NSMBookingBookPageState extends State<NSMBookingBookPage> {
                       DataColumn(label: Text('Booker Name', style: textStyle)),
                       DataColumn(label: Text('Total Shop Visits', style: textStyle)),
                       DataColumn(label: Text('Total Orders', style: textStyle)),
-                      DataColumn(label: Text('Total Booking', style: textStyle)),
-                      DataColumn(label: Text('Designation', style: textStyle)),
+                      DataColumn(label: Text('Total Sales', style: textStyle)),
+                      DataColumn(label: Text('Action', style: textStyle)),
                     ],
                     rows: List<DataRow>.generate(
                       10,
                           (index) => DataRow(
                         cells: [
-                          DataCell(Text('2024-07-20', style: textStyle)),
-                          DataCell(Text('User ${index + 1}', style: textStyle)),
-                          DataCell(Text('Booker ${index + 1}', style: textStyle)),
+                          DataCell(Text('2024-07-01')),
+                          DataCell(Text('USR123')),
+                          DataCell(Text('John Doe')),
+                          DataCell(Text('5')),
+                          DataCell(Text('3')),
+                          DataCell(Text('\$1500')),
                           DataCell(
-                            Text('${(index + 1) * 2}', style: textStyle),
-                            onTap: () => _openDetailsPage('Total Shop Visits'),
+                            IconButton(
+                              icon: Icon(Icons.info_outline, color: Colors.green),
+                              onPressed: () => _openDetailsPage('Details $index'),
+                            ),
                           ),
-                          DataCell(
-                            Text('${(index + 1) * 3}', style: textStyle),
-                            onTap: () => _openDetailsPage('Total Orders'),
-                          ),
-                          DataCell(
-                            Text('${(index + 1) * 4}', style: textStyle),
-                            onTap: () => _openDetailsPage('Total Booking'),
-                          ),
-                          DataCell(Text('Designation ${index + 1}', style: textStyle)),
                         ],
                       ),
                     ),
@@ -296,7 +320,6 @@ class _NSMBookingBookPageState extends State<NSMBookingBookPage> {
 
 class DetailsPage extends StatelessWidget {
   final String title;
-
   DetailsPage({required this.title});
 
   @override
@@ -307,7 +330,7 @@ class DetailsPage extends StatelessWidget {
         backgroundColor: Colors.green,
       ),
       body: Center(
-        child: Text('Details for $title'),
+        child: Text('Details Page for $title'),
       ),
     );
   }

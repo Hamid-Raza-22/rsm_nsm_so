@@ -112,7 +112,7 @@ class _NSMBookingStatusState extends State<NSMBookingStatus> {
             child: PageView(
               controller: _pageController,
               children: [
-                NSM_SM_Status(),
+                NsmSM(),
                 RSM_Status(), // Replace with your actual page widget
                 BookerStatus(), // Replace with your actual page widget
               ],
