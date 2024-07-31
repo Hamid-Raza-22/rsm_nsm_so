@@ -10,20 +10,54 @@ class _RSMBookingBookPageState extends State<RSMBookingBookPage> {
   final List<String> _shopOptions = ["Shop 1", "Shop 2", "Shop 3", "Shop 4", "Shop 5", "Shop 6", "Shop 7"];
   final List<String> _orderOptions = ["Order 1", "Order 2", "Order 3", "Order 4", "Order 5"];
   final List<String> _statusOptions = ["Dispatched", "Rescheduled", "Canceled", "Pending"];
-  final List<String> _roleOptions = ["Booker", "RSM"];
+  final List<String> _designationOptions = ["Booker", "RSM", "SM"];
 
   String? _selectedShop;
   String? _selectedOrder;
   String? _selectedStatus;
-  String? _selectedRole; // Added selected role
+  String? _selectedDesignation;
   DateTime? _startDate;
   DateTime? _endDate;
-  bool _showData = true; // Initialize to true to show the grid by default
+  bool _showData = false;
+
+  List<Map<String, dynamic>> _allData = []; // List to store all data
+  List<Map<String, dynamic>> _filteredData = []; // List to store filtered data
 
   @override
   void initState() {
     super.initState();
-    _showData = true; // Ensure grid is visible initially
+    _fetchData();
+  }
+
+  void _fetchData() {
+    // Sample data generation
+    _allData = List.generate(
+      10,
+          (index) => {
+        'visitDate': DateTime.now().subtract(Duration(days: index * 2)),
+        'userId': 'User $index',
+        'bookerName': 'Booker $index',
+        'totalShopVisits': '10',
+        'totalOrders': '5',
+        'totalAmount': '15',
+        'designation': _designationOptions[index % _designationOptions.length],
+      },
+    );
+
+    // Filter data based on the selected date range
+    if (_startDate != null && _endDate != null) {
+      _filteredData = _allData.where((data) {
+        DateTime visitDate = data['visitDate'];
+        return visitDate.isAfter(_startDate!.subtract(Duration(days: 1))) &&
+            visitDate.isBefore(_endDate!.add(Duration(days: 1)));
+      }).toList();
+    } else {
+      _filteredData = _allData;
+    }
+
+    setState(() {
+      _showData = true; // Show data after filtering
+    });
   }
 
   Future<void> _selectDate(BuildContext context, bool isStart) async {
@@ -40,6 +74,7 @@ class _RSMBookingBookPageState extends State<RSMBookingBookPage> {
         } else {
           _endDate = picked;
         }
+        _fetchData(); // Refresh data when date changes
       });
     }
   }
@@ -49,30 +84,17 @@ class _RSMBookingBookPageState extends State<RSMBookingBookPage> {
       _selectedShop = null;
       _selectedOrder = null;
       _selectedStatus = null;
-      _selectedRole = null; // Reset selected role
+      _selectedDesignation = null;
       _startDate = null;
       _endDate = null;
-      _showData = true; // Ensure grid remains visible when filters are cleared
+      _showData = false; // Hide data when filters are cleared
     });
-  }
-
-  void _handleSearch() {
-    setState(() {
-      _showData = true; // Ensure grid remains visible when search is performed
-    });
-  }
-
-  void _openDetailsPage(String title) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => DetailsPage(title: title)),
-    );
   }
 
   @override
   Widget build(BuildContext context) {
     final lightColorScheme = Theme.of(context).colorScheme;
-    final textStyle = TextStyle(fontFamily: "avenir", fontSize: 14);
+    final textStyle = TextStyle(fontFamily: "avenir", fontSize: 12);
 
     return Scaffold(
       body: Padding(
@@ -86,7 +108,7 @@ class _RSMBookingBookPageState extends State<RSMBookingBookPage> {
                 'Booker Order Detail',
                 style: TextStyle(
                   fontFamily: 'avenir next',
-                  fontSize: 18,
+                  fontSize: 16,
                   color: Colors.black,
                 ),
               ),
@@ -104,16 +126,17 @@ class _RSMBookingBookPageState extends State<RSMBookingBookPage> {
                 ),
                 contentPadding: const EdgeInsets.symmetric(horizontal: 16),
               ),
-              value: _selectedRole,
-              items: _roleOptions
-                  .map((role) => DropdownMenuItem(
-                value: role,
-                child: Text(role),
+              value: _selectedDesignation,
+              items: _designationOptions
+                  .map((designation) => DropdownMenuItem(
+                value: designation,
+                child: Text(designation, style: textStyle),
               ))
                   .toList(),
               onChanged: (value) {
                 setState(() {
-                  _selectedRole = value;
+                  _selectedDesignation = value;
+                  _fetchData();
                 });
               },
             ),
@@ -133,12 +156,13 @@ class _RSMBookingBookPageState extends State<RSMBookingBookPage> {
               items: _shopOptions
                   .map((shop) => DropdownMenuItem(
                 value: shop,
-                child: Text(shop),
+                child: Text(shop, style: textStyle),
               ))
                   .toList(),
               onChanged: (value) {
                 setState(() {
                   _selectedShop = value;
+                  _fetchData();
                 });
               },
             ),
@@ -158,12 +182,13 @@ class _RSMBookingBookPageState extends State<RSMBookingBookPage> {
               items: _orderOptions
                   .map((order) => DropdownMenuItem(
                 value: order,
-                child: Text(order),
+                child: Text(order, style: textStyle),
               ))
                   .toList(),
               onChanged: (value) {
                 setState(() {
                   _selectedOrder = value;
+                  _fetchData();
                 });
               },
             ),
@@ -216,121 +241,71 @@ class _RSMBookingBookPageState extends State<RSMBookingBookPage> {
               ],
             ),
             const SizedBox(height: 16),
-            DropdownButtonFormField<String>(
-              decoration: InputDecoration(
-                labelText: "Status",
-                filled: true,
-                fillColor: Colors.green.withOpacity(0.1),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide.none,
-                ),
-                contentPadding: const EdgeInsets.symmetric(horizontal: 16),
-              ),
-              value: _selectedStatus,
-              items: _statusOptions
-                  .map((status) => DropdownMenuItem(
-                value: status,
-                child: Text(status),
-              ))
-                  .toList(),
-              onChanged: (value) {
-                setState(() {
-                  _selectedStatus = value;
-                });
-              },
-            ),
-            const SizedBox(height: 24), // Add space above the buttons
             Row(
               children: [
                 Expanded(
-                  child: ElevatedButton(
-                    onPressed: _handleSearch,
-                    child: const Text('Search', style: TextStyle(color: Colors.white)),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.green,
-                      padding: const EdgeInsets.symmetric(vertical: 12),
-                      shape: RoundedRectangleBorder(
+                  child: DropdownButtonFormField<String>(
+                    decoration: InputDecoration(
+                      labelText: "Status",
+                      filled: true,
+                      fillColor: Colors.green.withOpacity(0.1),
+                      border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide.none,
                       ),
+                      contentPadding: const EdgeInsets.symmetric(horizontal: 16),
                     ),
+                    value: _selectedStatus,
+                    items: _statusOptions
+                        .map((status) => DropdownMenuItem(
+                      value: status,
+                      child: Text(status, style: textStyle),
+                    ))
+                        .toList(),
+                    onChanged: (value) {
+                      setState(() {
+                        _selectedStatus = value;
+                        _fetchData();
+                      });
+                    },
                   ),
                 ),
                 const SizedBox(width: 16),
-                Expanded(
-                  child: ElevatedButton(
-                    onPressed: _clearFilters,
-                    child: const Text('Clear Filters', style: TextStyle(color: Colors.white)),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.grey,
-                      padding: const EdgeInsets.symmetric(vertical: 12),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                    ),
+                ElevatedButton(
+                  onPressed: _clearFilters,
+                  child: const Text('Clear', style: TextStyle(color: Colors.white)),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.green,
+                    padding: EdgeInsets.symmetric(vertical: 12),
                   ),
                 ),
               ],
             ),
             const SizedBox(height: 16),
-            Expanded(
-              child: SingleChildScrollView(
-                scrollDirection: Axis.vertical,
+            if (_showData)
+              Expanded(
                 child: SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: DataTable(
                     columns: [
-                      DataColumn(label: Text('Visit Date', style: textStyle)),
-                      DataColumn(label: Text('User ID', style: textStyle)),
-                      DataColumn(label: Text('Booker Name', style: textStyle)),
-                      DataColumn(label: Text('Total Shop Visits', style: textStyle)),
-                      DataColumn(label: Text('Total Orders', style: textStyle)),
-                      DataColumn(label: Text('Total Sales', style: textStyle)),
-                      DataColumn(label: Text('Action', style: textStyle)),
+                      DataColumn(label: Text('Date')),
+                      DataColumn(label: Text('Booker')),
+                      DataColumn(label: Text('Attendance')),
+                      DataColumn(label: Text('Total')),
                     ],
-                    rows: List<DataRow>.generate(
-                      10,
-                          (index) => DataRow(
-                        cells: [
-                          DataCell(Text('2024-07-01')),
-                          DataCell(Text('USR123')),
-                          DataCell(Text('John Doe')),
-                          DataCell(Text('5')),
-                          DataCell(Text('3')),
-                          DataCell(Text('\$1500')),
-                          DataCell(
-                            IconButton(
-                              icon: Icon(Icons.info_outline, color: Colors.green),
-                              onPressed: () => _openDetailsPage('Details $index'),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                    rows: _filteredData.map((data) {
+                      return DataRow(cells: [
+                        DataCell(Text(DateFormat('yyyy-MM-dd').format(data['visitDate']))),
+                        DataCell(Text(data['bookerName'])),
+                        DataCell(Text(data['totalShopVisits'])),
+                        DataCell(Text(data['totalOrders'])),
+                      ]);
+                    }).toList(),
                   ),
                 ),
               ),
-            ),
           ],
         ),
-      ),
-    );
-  }
-}
-
-class DetailsPage extends StatelessWidget {
-  final String title;
-  DetailsPage({required this.title});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(title),
-        backgroundColor: Colors.green,
-      ),
-      body: Center(
-        child: Text('Details Page for $title'),
       ),
     );
   }
