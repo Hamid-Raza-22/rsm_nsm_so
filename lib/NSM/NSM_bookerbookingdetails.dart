@@ -48,8 +48,8 @@ class _NSMBookingBookPageState extends State<NSMBookingBookPage> {
     if (_startDate != null && _endDate != null) {
       _filteredData = _allData.where((data) {
         DateTime visitDate = data['visitDate'];
-        return visitDate.isAfter(_startDate!.subtract(Duration(days: 1))) &&
-            visitDate.isBefore(_endDate!.add(Duration(days: 1)));
+        return visitDate.isAfter(_startDate!.subtract(const Duration(days: 1))) &&
+            visitDate.isBefore(_endDate!.add(const Duration(days: 1)));
       }).toList();
     } else {
       _filteredData = _allData;
@@ -94,7 +94,7 @@ class _NSMBookingBookPageState extends State<NSMBookingBookPage> {
   @override
   Widget build(BuildContext context) {
     final lightColorScheme = Theme.of(context).colorScheme;
-    final textStyle = TextStyle(fontFamily: "avenir", fontSize: 12);
+    final textStyle = const TextStyle(fontFamily: "avenir", fontSize: 12);
 
     return Scaffold(
       body: Padding(
@@ -103,7 +103,7 @@ class _NSMBookingBookPageState extends State<NSMBookingBookPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 30),
-            Center(
+            const Center(
               child: Text(
                 'Booker Order Detail',
                 style: TextStyle(
@@ -276,7 +276,7 @@ class _NSMBookingBookPageState extends State<NSMBookingBookPage> {
                   child: const Text('Clear', style: TextStyle(color: Colors.white)),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.green,
-                    padding: EdgeInsets.symmetric(vertical: 12),
+                    padding: const EdgeInsets.symmetric(vertical: 12),
                   ),
                 ),
               ],
@@ -288,10 +288,10 @@ class _NSMBookingBookPageState extends State<NSMBookingBookPage> {
                   scrollDirection: Axis.horizontal,
                   child: DataTable(
                     columns: [
-                      DataColumn(label: Text('Date')),
-                      DataColumn(label: Text('Booker')),
-                      DataColumn(label: Text('Attendance')),
-                      DataColumn(label: Text('Total')),
+                      const DataColumn(label: Text('Date')),
+                      const DataColumn(label: Text('Booker')),
+                      const DataColumn(label: Text('Attendance')),
+                      const DataColumn(label: Text('Total')),
                     ],
                     rows: _filteredData.map((data) {
                       return DataRow(cells: [
