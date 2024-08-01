@@ -10,6 +10,7 @@ class smnavigation extends StatefulWidget {
 class _smnavigationState extends State<smnavigation> {
   int _selectedIndex = 0;
 
+
   void _onButtonTapped(int index) {
     setState(() {
       _selectedIndex = index;
