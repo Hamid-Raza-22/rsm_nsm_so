@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'RSM_status.dart';
 
-class rsmdetailpagee extends StatefulWidget {
+class RsmDetailPagee extends StatefulWidget {
   final Booker booker;
 
-  rsmdetailpagee({required this.booker});
+  RsmDetailPagee({required this.booker});
 
   @override
-  _rsmdetailpageeState createState() => _rsmdetailpageeState();
+  _RsmDetailPageeState createState() => _RsmDetailPageeState();
 }
 
-class _rsmdetailpageeState extends State<rsmdetailpagee> {
+class _RsmDetailPageeState extends State<RsmDetailPagee> {
   final List<String> _statusOptions = ["Clock in", "Clock out"];
   final List<Map<String, dynamic>> _data = [
     {
@@ -97,7 +97,7 @@ class _rsmdetailpageeState extends State<rsmdetailpagee> {
         final isWithinDateRange = (_startDate == null && _endDate == null) ||
             (_startDate != null && _endDate == null && entryDate.isAtSameMomentAs(_startDate!)) ||
             (_startDate == null && _endDate != null && entryDate.isAtSameMomentAs(_endDate!)) ||
-            (_startDate != null && _endDate != null && entryDate.isAfter(_startDate!.subtract(Duration(days: 1))) && entryDate.isBefore(_endDate!.add(Duration(days: 1))));
+            (_startDate != null && _endDate != null && entryDate.isAfter(_startDate!.subtract(const Duration(days: 1))) && entryDate.isBefore(_endDate!.add(const Duration(days: 1))));
         final matchesStatus = _selectedStatus == null ||
             (_selectedStatus == "Clock in" && entry['clockIn'].isNotEmpty) ||
             (_selectedStatus == "Clock out" && entry['clockOut'].isNotEmpty);
@@ -108,7 +108,7 @@ class _rsmdetailpageeState extends State<rsmdetailpagee> {
 
   @override
   Widget build(BuildContext context) {
-    final textStyle = const TextStyle(fontFamily: "avenir", fontSize: 14);
+    const textStyle = TextStyle(fontFamily: "avenir", fontSize: 14);
 
     return Scaffold(
       appBar: AppBar(
@@ -223,7 +223,6 @@ class _rsmdetailpageeState extends State<rsmdetailpagee> {
                 Expanded(
                   child: ElevatedButton(
                     onPressed: _clearFilters,
-                    child: const Text('Clear', style: TextStyle(color: Colors.white)),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.green,
                       padding: const EdgeInsets.symmetric(vertical: 12),
@@ -231,6 +230,7 @@ class _rsmdetailpageeState extends State<rsmdetailpagee> {
                         borderRadius: BorderRadius.circular(12),
                       ),
                     ),
+                    child: const Text('Clear', style: TextStyle(color: Colors.white)),
                   ),
                 ),
               ],
@@ -243,11 +243,11 @@ class _rsmdetailpageeState extends State<rsmdetailpagee> {
                   scrollDirection: Axis.horizontal,
                   child: DataTable(
                     columns: [
-                      DataColumn(label: Text('Date', style: textStyle)),
-                      DataColumn(label: Text('Clock In', style: textStyle)),
-                      DataColumn(label: Text('Clock Out', style: textStyle)),
-                      DataColumn(label: Text('Total Time', style: textStyle)),
-                      DataColumn(label: Text('Total Distance', style: textStyle)),
+                      const DataColumn(label: Text('Date', style: textStyle)),
+                      const DataColumn(label: Text('Clock In', style: textStyle)),
+                      const DataColumn(label: Text('Clock Out', style: textStyle)),
+                      const DataColumn(label: Text('Total Time', style: textStyle)),
+                      const DataColumn(label: Text('Total Distance', style: textStyle)),
                     ],
                     rows: _filteredData.map((entry) {
                       return DataRow(

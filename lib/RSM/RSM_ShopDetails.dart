@@ -92,7 +92,7 @@ class _ShopDetailPageState extends State<ShopDetailPage> {
             hintStyle: TextStyle(color: Colors.grey[600]),
             border: InputBorder.none,
             focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.green, width: 1.5),
+              borderSide: const BorderSide(color: Colors.green, width: 1.5),
               borderRadius: BorderRadius.circular(10.0),
             ),
             enabledBorder: OutlineInputBorder(

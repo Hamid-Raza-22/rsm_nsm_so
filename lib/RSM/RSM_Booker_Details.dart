@@ -95,7 +95,7 @@ class _RsmbookerdetailsState extends State<Rsmbookerdetails> {
             hintStyle: TextStyle(color: Colors.grey[600], fontSize: 14),
             border: InputBorder.none,
             focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.green, width: 1.0),
+              borderSide: const BorderSide(color: Colors.green, width: 1.0),
               borderRadius: BorderRadius.circular(8.0),
             ),
             enabledBorder: OutlineInputBorder(
@@ -243,12 +243,12 @@ class _RsmbookerdetailsState extends State<Rsmbookerdetails> {
       appBar: AppBar(
         backgroundColor: Colors.green,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black),
+          icon: const Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () {
             Navigator.pop(context);
           },
         ),
-        title: Text('Booker Status'),
+        title: const Text('Booker Status'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),

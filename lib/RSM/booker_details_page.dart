@@ -97,7 +97,7 @@ class _RSMBookerDetailsPageState extends State<RSMBookerDetailsPage> {
         final isWithinDateRange = (_startDate == null && _endDate == null) ||
             (_startDate != null && _endDate == null && entryDate.isAtSameMomentAs(_startDate!)) ||
             (_startDate == null && _endDate != null && entryDate.isAtSameMomentAs(_endDate!)) ||
-            (_startDate != null && _endDate != null && entryDate.isAfter(_startDate!.subtract(Duration(days: 1))) && entryDate.isBefore(_endDate!.add(Duration(days: 1))));
+            (_startDate != null && _endDate != null && entryDate.isAfter(_startDate!.subtract(const Duration(days: 1))) && entryDate.isBefore(_endDate!.add(const Duration(days: 1))));
         final matchesStatus = _selectedStatus == null ||
             (_selectedStatus == "Clock in" && entry['clockIn'].isNotEmpty) ||
             (_selectedStatus == "Clock out" && entry['clockOut'].isNotEmpty);
